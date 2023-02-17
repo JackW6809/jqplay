@@ -54,6 +54,7 @@ USER jqplay
 
 WORKDIR /app
 ENV PATH="/app:${PATH}"
+ENV DATABASE_URL "postgres://jqplay-user:jqplay-pass@db/jqplay-db?sslmode=disable"
 
 COPY --from=jqbuilder /usr/local/bin/jq /app
 COPY --from=gobuilder /go/bin/* /app
