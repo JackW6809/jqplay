@@ -44,7 +44,6 @@ jobs:
     name: Docker Push
     needs: [build, docker_build, test, vet]
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/master'
     steps:
       - uses: actions/checkout@v2
 
