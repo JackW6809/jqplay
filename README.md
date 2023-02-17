@@ -30,7 +30,7 @@ To develop `jqplay` you must have the following tools:\
 #### PostgreSQL
 You must have a [PostgreSQL](https://www.postgresql.org/) database running.
 #### MySQL
-You must have a [mySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) database running.
+You must have a [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) database running.
 ### Makefile
 Running `make` will build the `jqplay` binary and the frontend assets.
 
@@ -50,7 +50,7 @@ It is recommended that you change the database credentials in the [`docker-compo
 ### Docker
 If you already have a postgreSQL database running, you can make use of my public Docker image to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
 ```bash
-docker run -d -p 8080:8080 -e DATABASE_URL="postgres://jqplay-user:jqplay-pass@postegresql-host/jqplay-db?sslmode=disable" DATABASE_DRIVER="postgres" registry.jackoxi.systems/public-images/jq-play-server:latest-mysql
+docker run -d -p 8080:8080 -e DATABASE_URL="postgres://jqplay-user:jqplay-pass@postegresql-host/jqplay-db?sslmode=disable" DATABASE_DRIVER="postgres" registry.jackoxi.systems/public-images/jq-play-server:latest
 ```
 
 ### Dockerfile
@@ -80,20 +80,20 @@ docker-compose -f docker-compose-mysql.yml up -d
 It is recommended that you change the database credentials in the [`docker-compose-mysql.yml`](docker-compose-mysql.yml) file to something more secure.
 
 ### Docker
-If you already have a mySQL database running, you can make use of my public Docker image to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+If you already have a MySQL database running, you can make use of my public Docker image to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
 ```bash
-docker run -d -p 8080:8080 -e DATABASE_URL="jqplay_user:jqplay_pass@tcp(db:3306)/jqplay_db" registry.jackoxi.systems/public-images/jq-play-server:latest-mysql
+docker run -d -p 8080:8080 -e DATABASE_URL="jqplay_user:jqplay_pass@tcp(db:3306)/jqplay_db" registry.jackoxi.systems/public-images/jq-play-server:latest
 ```
 
 ### Dockerfile
-If you have a mySQL running, you can make use of the [`Dockerfile`](Dockerfile) to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+If you have a MySQL running, you can make use of the [`Dockerfile`](Dockerfile) to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
 ```bash
 docker build -t jqplay --build-arg DATABASE_URL="jqplay_user:jqplay_pass@tcp(db:3306)/jqplay_db" .
 docker run -d -p 8080:8080 jqplay
 ```
 
 ### Binary
-If you have a mySQL database running, you can make use of the jqplay binary to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+If you have a MySQL database running, you can make use of the jqplay binary to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
 ```bash
 DATABASE_URL="jqplay_user:jqplay_pass@tcp(db:3306)/jqplay_db" DATABASE_DRIVER="mysql" ./jqplay
 ```
