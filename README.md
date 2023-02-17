@@ -73,11 +73,11 @@ The following environment variables are required to run `jqplay`:\
 `DATABASE_DRIVER` - The database driver to use, this must be set to `mysql`.
 
 ### Docker-Compose
-You are able to make use of the [`docker-compose.yml`](docker-compose-mysql.yml) file to deploy `jqplay` with a database meaning little setup is required with the following command:
+You are able to make use of the [`docker-compose-mysql.ymll`](docker-compose-mysql.yml) file to deploy `jqplay` with a database meaning little setup is required with the following command:
 ```bash
 docker-compose -f docker-compose-mysql.yml up -d
 ```
-It is recommended that you change the database credentials in the [`docker-compose.yml`](docker-compose-mysql.yml) file to something more secure.
+It is recommended that you change the database credentials in the [`docker-compose-mysql.yml`](docker-compose-mysql.yml) file to something more secure.
 
 ### Docker
 If you already have a mySQL database running, you can make use of my public Docker image to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
