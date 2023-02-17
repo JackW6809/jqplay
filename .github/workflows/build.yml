@@ -66,5 +66,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
-          tags: ${{ steps.meta.outputs.tags }}, jq-play-server:latest
+          tags: ${{ steps.meta.outputs.tags }}, registry.jackoxi.systems/public-images/jq-play-server:latest
           labels: ${{ steps.meta.outputs.labels }}
