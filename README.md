@@ -32,7 +32,7 @@ You must have a [PostgreSQL](https://www.postgresql.org/) database running.
 #### MySQL
 You must have a [MySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/) database running.
 ### Makefile
-Running `make` will build the `jqplay` binary and the frontend assets.
+Running `make build` will build the `jqplay` binary and the frontend assets.
 
 ## Deployment - PostgreSQL
 ### Environment Variables

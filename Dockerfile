@@ -27,7 +27,7 @@ RUN git clone --recurse-submodules https://github.com/stedolan/jq.git && \
     ./configure --disable-dependency-tracking --disable-silent-rules --disable-maintainer-mode --prefix=/usr/local && \
     make install
 
-FROM --platform=$BUILDPLATFORM golang:latest as gobuilder
+FROM golang:latest as gobuilder
 ARG TARGETOS TARGETARCH
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -60,5 +60,7 @@ ENV PORT 8080
 
 COPY --from=jqbuilder /usr/local/bin/jq /app
 COPY --from=gobuilder /go/bin/* /app
+
+EXPOSE 8080
 
 ENTRYPOINT ["jqplay"]
