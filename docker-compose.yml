@@ -17,5 +17,3 @@ services:
       POSTGRES_USER: jqplay-user
       POSTGRES_PASSWORD: jqplay-pass
       POSTGRES_DB: jqplay-db
-    volumes:
-      - ./server/db.sql:/docker-entrypoint-initdb.d/db.sql
