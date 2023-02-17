@@ -54,6 +54,11 @@ func ConnectDB(url string) (*DB, error) {
 		return nil, err
 	}
 
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS snippets (id BIGSERIAL, slug TEXT NOT NULL UNIQUE, j TEXT NOT NULL, q TEXT NOT NULL, o JSONB, created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp)`)
+	if err != nil {
+		return nil, err
+	}
+
 	return &DB{db}, nil
 }
 

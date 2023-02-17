@@ -1,89 +1,64 @@
-# jqplay
-
-[![OpenCollective](https://opencollective.com/jqplay/backers/badge.svg)](#backers) [![OpenCollective](https://opencollective.com/jqplay/sponsors/badge.svg)](#sponsors)
-
-[jqplay](https://jqplay.org) is a playground for [jq](https://github.com/stedolan/jq). Please put it into good use.
+# ![Alt text](assets/images/logo.png) (PostgreSQL)
+[jqplay](https://jqplay.jackoxi.systems) is a playground for [jq](https://github.com/stedolan/jq).
 
 ## Development
+### Dependencies
+To develop `jqplay` you must have the following tools:\
+[Go development environment](http://golang.org/doc/install).\
+[Node.js](https://nodejs.org)\
+[yarn](https://yarnpkg.com/)\
+[mySQL](https://www.mysql.com/) or [MariaDB](https://mariadb.org/)
+### Makefile
+Running `make` will build the `jqplay` binary and the frontend assets.
 
-To develop `jqplay`, you need to have a [Go development environment](http://golang.org/doc/install).
-You also need to have Node & Postgresql installed.
+## Deployment
+You can make use of one of the following methods to deploy `jqplay`:\
+### Docker-Compose
+You are able to make use of the [`docker-compose.yml`](docker-compose.yml) file to deploy `jqplay` with a database meaning little setup is required with the following command:
+```bash
+docker-compose up -d
+```
+It is recommended that you change the database credentials in the [`docker-compose.yml`](docker-compose.yml) file to something more secure.
+```yml
+version: "3.9"
 
-### make start
+services:
+  jqplay:
+    image: registry.jackoxi.systems/public-images/jq-play-server:latest
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - "8080"
+    environment:
+      DATABASE_URL: "postgres://jqplay-user:jqplay-pass@db/jqplay-db?sslmode=disable"
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: jqplay-user
+      POSTGRES_PASSWORD: jqplay-pass
+      POSTGRES_DB: jqplay-db
+ ```
 
-This script will build and start the `jqplay` server with `docker-compose`.
+### Docker
+If you already have a postgreSQL database running, you can make use of my public Docker image to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+```bash
+docker run -d -p 8080:8080 -e DATABASE_URL="postgres://jqplay-user:jqplay-pass@postegresql-host/jqplay-db?sslmode=disable" registry.jackoxi.systems/public-images/jq-play-server:latest-mysql
+```
 
-## Support
+### Dockerfile
+If you have a postgreSQL running, you can make use of the [`Dockerfile`](Dockerfile) to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+```bash
+docker build -t jqplay --build-arg DATABASE_URL="postgres://jqplay-user:jqplay-pass@postegresql-host/jqplay-db?sslmode=disable" .
+docker run -d -p 8080:8080 jqplay
+```
 
-### Backers
-Love our work and community? [Become a backer](https://opencollective.com/jqplay#backer).
+### Binary
+If you have a postgreSQL database running, you can make use of the jqplay binary to deploy `jqplay` with the following command, replacing the `DATABASE_URL` environment variable with your database credentials:
+```bash
+DATABASE_URL="postgres://jqplay-user:jqplay-pass@postegresql-host/jqplay-db?sslmode=disable" ./jqplay
+```
 
-<a href="https://opencollective.com/jqplay/backer/0/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/0/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/1/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/1/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/2/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/2/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/3/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/3/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/4/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/4/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/5/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/5/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/6/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/6/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/7/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/7/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/8/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/8/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/9/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/9/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/10/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/10/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/11/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/11/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/12/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/12/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/13/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/13/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/14/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/14/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/15/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/15/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/16/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/16/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/17/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/17/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/18/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/18/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/19/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/19/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/20/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/20/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/21/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/21/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/22/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/22/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/23/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/23/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/24/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/24/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/25/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/25/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/26/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/26/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/27/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/27/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/28/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/28/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/backer/29/website" target="_blank"><img src="https://opencollective.com/jqplay/backer/29/avatar.svg"></a>
-
-### Sponsors
-
-Use jqplay? Love jqplay? Help [sponsor the project](https://opencollective.com/jqplay#sponsor) and help fill our mugs with coffee.
-
-<a href="https://opencollective.com/jqplay/sponsor/0/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/1/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/2/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/3/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/4/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/5/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/6/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/7/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/8/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/9/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/9/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/10/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/10/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/11/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/11/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/12/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/12/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/13/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/13/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/14/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/14/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/15/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/15/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/16/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/16/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/17/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/17/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/18/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/18/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/19/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/19/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/20/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/20/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/21/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/21/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/22/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/22/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/23/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/23/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/24/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/24/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/25/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/25/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/26/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/26/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/27/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/27/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/28/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/28/avatar.svg"></a>
-<a href="https://opencollective.com/jqplay/sponsor/29/website" target="_blank"><img src="https://opencollective.com/jqplay/sponsor/29/avatar.svg"></a>
-
-### License
-
+# License
 jqplay is released under the MIT license. See [LICENSE.md](https://github.com/owenthereal/jqplay/blob/master/LICENSE.md).
