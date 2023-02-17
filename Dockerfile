@@ -55,11 +55,10 @@ USER jqplay
 WORKDIR /app
 ENV PATH="/app:${PATH}"
 ENV DATABASE_URL "postgres://jqplay-user:jqplay-pass@db/jqplay-db?sslmode=disable"
+ENV DATABASE_DRIVER "postgres"
+ENV PORT 8080
 
 COPY --from=jqbuilder /usr/local/bin/jq /app
 COPY --from=gobuilder /go/bin/* /app
-
-ENV PORT 8080
-EXPOSE 8080
 
 ENTRYPOINT ["jqplay"]

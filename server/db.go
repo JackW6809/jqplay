@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"io"
 
+	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jackc/pgx/v4/stdlib"
 	"github.com/jmoiron/sqlx"
 	"github.com/owenthereal/jqplay/jq"
@@ -48,13 +49,21 @@ func ToJQ(s *Snippet) *jq.JQ {
 	}
 }
 
-func ConnectDB(url string) (*DB, error) {
-	db, err := sqlx.Connect("pgx", url)
+func ConnectDB(url string, driverName string) (*DB, error) {
+	var query string
+	if driverName == "mysql" {
+		driverName = "mysql"
+		query = "CREATE TABLE IF NOT EXISTS snippets (id BIGINT NOT NULL AUTO_INCREMENT, slug VARCHAR(255) NOT NULL UNIQUE, j TEXT NOT NULL, q TEXT NOT NULL, o JSON, created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, PRIMARY KEY (id))"
+	} else {
+		driverName = "pgx"
+		query = "CREATE TABLE IF NOT EXISTS snippets (id BIGSERIAL, slug TEXT NOT NULL UNIQUE, j TEXT NOT NULL, q TEXT NOT NULL, o JSONB, created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp)"
+	}
+	db, err := sqlx.Connect(driverName, url)
 	if err != nil {
 		return nil, err
 	}
 
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS snippets (id BIGSERIAL, slug TEXT NOT NULL UNIQUE, j TEXT NOT NULL, q TEXT NOT NULL, o JSONB, created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT current_timestamp)`)
+	_, err = db.Exec(query)
 	if err != nil {
 		return nil, err
 	}

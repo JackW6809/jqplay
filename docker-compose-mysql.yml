@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  jqplay:
+    image: registry.jackoxi.systems/public-images/jq-play-server:latest
+    depends_on:
+      - db
+    restart: always
+    ports:
+      - "8080"
+    environment:
+      DATABASE_URL: "jqplay_user:jqplay_pass@tcp(db:3306)/jqplay_db"
+      DATABASE_DRIVER: "mysql"
+  db:
+    image: mariadb:latest
+    restart: always
+    environment:
+      MARIADB_RANDOM_ROOT_PASSWORD: "1"
+      MARIADB_DATABASE: "jqplay_db"
+      MARIADB_USER: "jqplay_user"
+      MARIADB_PASSWORD: "jqplay_pass"

@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"html/template"
 	"net/http"
 	"syscall"
@@ -24,7 +25,10 @@ type Server struct {
 }
 
 func (s *Server) Start(ctx context.Context) error {
-	db, err := ConnectDB(s.Config.DatabaseURL)
+	if s.Config.DatabaseDriver != "mysql" && s.Config.DatabaseDriver != "postgres" {
+		return fmt.Errorf("error, shutting down server... Unsupported database driver: %s. Supported drivers are mysql and postgres", s.Config.DatabaseDriver)
+	}
+	db, err := ConnectDB(s.Config.DatabaseURL, s.Config.DatabaseDriver)
 	if err != nil {
 		return err
 	}
@@ -44,7 +48,7 @@ func (s *Server) Start(ctx context.Context) error {
 		defer cancel()
 
 		if err := srv.Shutdown(ctx); err != nil {
-			log.WithError(err).Error("error shutting down server")
+			log.WithError(err).Error("error, shutting down server...")
 		}
 	})
 
