@@ -1,4 +1,4 @@
-FROM --platform=$BUILDPLATFORM ubuntu as jqbuilder
+FROM ubuntu as jqbuilder
 
 ARG JQ_TAG=jq-1.6
 
@@ -45,9 +45,6 @@ RUN --mount=type=cache,target=/root/.cache/go-build \
     make build
 
 FROM ubuntu
-
-MAINTAINER Owen Ou
-LABEL org.opencontainers.image.source https://github.com/owenthereal/jqplay
 
 RUN useradd -m jqplay
 USER jqplay
