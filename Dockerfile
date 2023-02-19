@@ -1,4 +1,4 @@
-FROM ubuntu as jqbuilder
+FROM --platform=$BUILDPLATFORM ubuntu as jqbuilder
 
 ARG JQ_TAG=jq-1.6
 
@@ -27,7 +27,7 @@ RUN git clone --recurse-submodules https://github.com/stedolan/jq.git && \
     ./configure --disable-dependency-tracking --disable-silent-rules --disable-maintainer-mode --prefix=/usr/local && \
     make install
 
-FROM golang:latest as gobuilder
+FROM --platform=$BUILDPLATFORM golang:latest as gobuilder
 ARG TARGETOS TARGETARCH
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
