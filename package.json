@@ -1,15 +1,15 @@
 {
   "name": "jqplay",
-  "version": "1.0.0",
+  "version": "1.6.1",
   "description": "jqplay",
   "repository": {
     "type": "git",
-    "url": "https://github.com/owenthereal/jqplay"
+    "url": "https://github.com/JackW6809/jqplay"
   },
-  "author": "Owen Ou",
+  "author": "Jack W",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/owenthereal/jqplay/issues"
+    "url": "https://github.com/JackW6809/jqplay/issues"
   },
   "homepage": "https://jqplay.org",
   "dependencies": {
