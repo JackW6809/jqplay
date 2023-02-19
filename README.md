@@ -24,7 +24,7 @@
 ## Development
 ### Dependencies
 To develop `jqplay` you must have the following tools:\
-[Go development environment](http://golang.org/doc/install).\
+[Go development environment](http://golang.org/doc/install)\
 [Node.js](https://nodejs.org)\
 [yarn](https://yarnpkg.com/)
 #### PostgreSQL
